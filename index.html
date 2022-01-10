@@ -60,11 +60,15 @@
 
 <div class="home-container">
     <h1>Articles</h1>
+    <!--search display-->
+    <input v-model="searchKey" type="search" name="" id="search" placeholder="Rechercher" autocomplete="off">
 
 
+
+    <!--cards display-->
       <div class="card-cart-container">
         <div class="card-container">
-          <div v-for="product in products" class="card">
+          <div v-for="product in filteredList" class="card">
 
             <div class="img-container">
               <img v-bind:src="product.img" alt="">
@@ -78,9 +82,16 @@
             <div class="card-icons">
               <div class="like-container">
                 <input type="checkbox" name="chekbox" v-bind:id="product.id">
+                
                 <label v-bind:for="product.id">
                   <i class="fas fa-heart"></i>
                 </label>
+              </div>
+
+              <div class="add-to-cart">
+                <button>
+                  <i class="fas fa-shopping-cart"></i>
+                </button>
               </div>
             </div>
 

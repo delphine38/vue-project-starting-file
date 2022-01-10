@@ -22,9 +22,27 @@ const Home = {
     data: ()=>{
         return{
         products, 
+        searchKey:'',
 
         }
+    },
+    /*** c'est comme si vue surveille les changements sur le DOM  pour***/
+computed:{
+    filteredList(){
+        return this.products.filter((product) =>{
+        return product.description.toLowerCase().includes(this.searchKey.toLowerCase());
+
+        })
     }
+
+},
+    /***fonction qui ne seront passer que si on clique sur un bouton***/
+
+methods:{
+    
+}
+
+
 }
 const UserSettings = {
     template: '<h1>UserSettings</h1>',
