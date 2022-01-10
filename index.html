@@ -63,7 +63,11 @@
     <!--search display-->
     <input v-model="searchKey" type="search" name="" id="search" placeholder="Rechercher" autocomplete="off">
 
-
+    <!--afficher le nombre de résultats par recherche-->
+    <!--si searchKey && la longueur de filteredList est superieur ou égale à 1-->
+    <span v-if="searchKey && filteredList.length >=1">
+{{filteredList.length}} résultat<span v-if="filteredList.length >=2">s</span>
+    </span>
 
     <!--cards display-->
       <div class="card-cart-container">
