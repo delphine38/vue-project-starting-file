@@ -23,6 +23,8 @@ const Home = {
         return{
         products, 
         searchKey:'',
+        liked: [],
+        cart: []
 
         }
     },
@@ -33,13 +35,45 @@ computed:{
         return product.description.toLowerCase().includes(this.searchKey.toLowerCase());
 
         })
+    },
+    getLikeCookie(){
+        let cookieValue = JSON.parse($cookies.get('like'));
+        cookieValue == null ? this.liked = [] : this.liked = cookieValue
     }
 
 },
     /***fonction qui ne seront passer que si on clique sur un bouton***/
-
 methods:{
+    setLikeCookie(){
+        document.addEventListener('input', ()=>{
+            setTimeout(() =>{
+            $cookies.set('like', JSON.stringify(this.liked));
+            }, 300);
+        })
+    },
+
+
+    addToCart(product){
+        //check if already in array
+        for(let i = 0 ; i < this.cart.length; i++){
+            if(this.cart[i].id === product.id){
+                return this.cart [i].quantity++
+            }
+        }
+    this.cart.push({
+        id: product.id, 
+        img: product.img,
+        description: product.description,
+        price: product.price,
+        quantity:1
+    })
+    }
     
+},
+
+    /***monte des composants : a chaque lancement de page, recupere les cookies et les injecte à "like"***/
+mounted: () =>{
+    this.getLikeCookie;
 }
 
 
